@@ -40,6 +40,7 @@
 
         @stack('modals')
 
+        @vite('resources/js/app.js')
         @livewireScripts
     </body>
 </html>
