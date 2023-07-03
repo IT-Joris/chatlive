@@ -14,6 +14,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        {{ $css ?? '' }}
+
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -22,6 +24,8 @@
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @livewire('navigation-menu')
+
+            <div id="toast"></div>
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -41,6 +45,9 @@
         @stack('modals')
 
         @vite('resources/js/app.js')
+
+        {{ $script ?? '' }}
+
         @livewireScripts
     </body>
 </html>

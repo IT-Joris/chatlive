@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified' ])->group(function () {
     Route::get('/dashboard',  ['App\Http\Controllers\SendMessageController', 'index'])->name('dashboard');
+
+    Route::get('/dashboard/file',  ['App\Http\Controllers\FileController', 'index'])->name('dashboard.file');
+    Route::post('/dashboard/file',  ['App\Http\Controllers\FileController', 'store'])->name('dashboard.file.post');
+    Route::get('/dashboard/file/{file}',  ['App\Http\Controllers\FileController', 'download'])->name('dashboard.file.download');
 });

@@ -21,3 +21,7 @@ use App\Models\User;
 Broadcast::channel('channel.1', function ($user) {
     return $user instanceof User;
 });
+
+Broadcast::channel('upload-file', function ($user) {
+    return $user instanceof User;
+});
