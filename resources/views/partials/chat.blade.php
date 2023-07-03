@@ -36,13 +36,13 @@
     </div>
 
     <div class="bg-gray-300 p-4">
-        <div class="flex gap-4">
-            <input class="flex items-center h-10 w-full rounded px-3 text-sm" name="newMessage" type="text"
-                   placeholder="Entrer votre message..." wire:model.defer="newMessage">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button"
-                    wire:click="sendMessage">Envoyer
+        <form method="POST" class="flex gap-4" id="form-chat">
+            <input class="flex items-center h-10 w-full rounded px-3 text-sm" name="content" id="content" type="text" placeholder="Entrer votre message...">
+            <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                Envoyer
             </button>
-        </div>
+        </form>
     </div>
 </div>
 <!-- Component End  -->
