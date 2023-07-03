@@ -16,13 +16,18 @@ class SendMessageController extends Controller
 
     public function store(){
 
+        $file = false;
         $message = Message::create([
             'content' => request('content'),
             'user_id' => request('user_id'),
-            'channel_id' => 1
+            'channel_id' => 1,
         ]);
 
-        broadcast(new SendMessageEvent($message))->toOthers();
+        if (preg_match('/dashboard\/file\/[0-9]+/', $message->content)) {
+            $file = '<a href="' . $message->content . '" target="_blank">' . $message->content . '</a>';
+        }
+
+        broadcast(new SendMessageEvent($message, $file))->toOthers();
 
         return response()->json([
             'message' => 'Message envoyé',

@@ -17,6 +17,13 @@ class FileEvent implements ShouldBroadcast
     {
     }
 
+    public function broadcastWith(): array
+    {
+        return [
+            'html' => view('partials.toast-file-download', ['file' => $this->file])->render(),
+        ];
+    }
+
     public function broadcastOn(): array
     {
         return [

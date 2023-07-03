@@ -13,8 +13,25 @@ class SendMessageEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(public Message $message)
+    public function __construct(public Message $message, public ?string $file)
     {
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'message' => $this->message->content,
+            'created_at' => $this->message->created_at->diffForHumans(),
+            'user' => [
+                'id' => $this->message->user->id,
+                'name' => $this->message->user->name,
+            ],
+            'file' => $this->file,
+            'html' => [
+                'author' => view('partials.message', ['message' => $this->message, 'other' => false, 'file' => $this->file])->render(),
+                'other' => view('partials.message', ['message' => $this->message, 'other' => true, 'file' => $this->file])->render(),
+            ]
+        ];
     }
 
     public function broadcastOn(): array
